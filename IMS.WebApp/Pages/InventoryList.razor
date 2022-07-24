@@ -1,0 +1,42 @@
+﻿@page "/inventories"
+
+<h3>Inventory List</h3>
+<br />
+<ViewInventoriesComponent OnSearchInventories="OnSearchInventories"></ViewInventoriesComponent>
+
+@if (listInventoris != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantiy</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inv in this.listInventoris)
+            {
+                <tr>
+                    <td>@inv.InventoryName</td>
+                    <td>@inv.Quantity</td>
+                    <td>@inv.Price.ToString("c")</td>
+                    <td>
+                        <button type="button" class="btn btn-light">Edit</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Inventory> listInventoris;
+
+    private void OnSearchInventories(List<Inventory> inventories)
+    {
+        // I clodes the tab and reopend, it works. I think VS2022 is not stable yet
+        listInventoris = inventories;
+    }
+}
